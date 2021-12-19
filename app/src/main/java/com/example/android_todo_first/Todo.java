@@ -18,6 +18,18 @@ public class Todo {
         this.updatedAt = updatedAt;
     }
 
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
+
     public Todo(){
         id=UUID.randomUUID();
         updatedAt=new Date();
