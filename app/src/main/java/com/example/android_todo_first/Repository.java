@@ -2,6 +2,8 @@ package com.example.android_todo_first;
 
 import android.content.Context;
 
+import androidx.collection.CircularArray;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,55 +11,56 @@ import java.util.UUID;
 
 public class Repository {
 
-    private List<Todo> todoList;
-
     private static Repository sInstance;
+    private List<Todo> todos;
 
-    private Repository(){
-        todoList = new ArrayList<>();
-                for(int i=0; i<10; i++) {
-                    Todo todo = new Todo();
-                    todo.setTitle("title"+i);
-                    todo.setDescription("description"+i);
-                    todo.setPriority(i);
-                    todoList.add(todo);
-                }
+    private  Repository(Context context) {
+        todos = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Todo todo = new Todo();
+            todo.setTitle("title" + i);
+            todo.setDescription("description" + i);
+            todo.setPriority(1);
+            todos.add(todo);
+        }
     }
 
-    public static Repository getsInstance(Context context){
-        if(sInstance == null)
-            sInstance = new Repository();
+    public static Repository getInstance(Context context){
+        if(sInstance == null){
+            sInstance = new Repository(context);
+        }
         return sInstance;
     }
 
-    public List<Todo> getTodoList() {
-        return todoList;
+    public List<Todo> getAllTodos(){
+        return todos;
     }
 
     public Todo getTodoById(UUID id){
-        for(Todo item : todoList){
-            if(item.getId().equals(id))
-                return item;
+        for (int i = 0; i < todos.size(); i++) {
+            Todo todo = todos.get(i);
+            if(todo.getId().equals(id)){
+                return todo;
+            }
         }
         return null;
     }
 
-    public void deleteAll(){
-        todoList.clear();
-    }
-
     public void delete(UUID id){
         Todo todo = getTodoById(id);
-        if(todo != null){
-            todoList.remove(todo);
-        }
+        if(todo != null)
+            todos.remove(todo);
+    }
+
+    public void addTodo(Todo todo){
+        todos.add(todo);
     }
 
     public Todo update(Todo todo){
         Todo newTodo = getTodoById(todo.getId());
-        newTodo.setPriority(todo.getPriority());
         newTodo.setTitle(todo.getTitle());
         newTodo.setDescription(todo.getDescription());
+        newTodo.setPriority(todo.getPriority());
         newTodo.setUpdatedAt(new Date());
         return newTodo;
     }

@@ -12,27 +12,23 @@ public class Todo {
     private Date updatedAt;
 
     public Todo(UUID id, String title, String description, int priority, Date updatedAt) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public String toString() {
-        return "Todo{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", priority=" + priority +
-                ", updatedAt=" + updatedAt +
-                '}';
+    public Todo(String title, String description, int priority, Date updatedAt) {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.updatedAt = updatedAt;
     }
 
-
-    public Todo(){
-        id=UUID.randomUUID();
-        updatedAt=new Date();
+    public Todo() {
+        id = UUID.randomUUID();
+        updatedAt = new Date();
     }
 
     public UUID getId() {
@@ -73,5 +69,16 @@ public class Todo {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

@@ -7,12 +7,13 @@ android {
 
     defaultConfig {
         applicationId "com.example.android_todo_first"
-        minSdk 30
+        minSdk 23
         targetSdk 31
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion 23
     }
 
     buildTypes {
